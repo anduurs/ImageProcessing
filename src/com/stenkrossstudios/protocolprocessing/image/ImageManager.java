@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
 
@@ -19,7 +18,7 @@ public class ImageManager
 	
 	public ImageManager() 
 	{
-		System.loadLibrary( Core.NATIVE_LIBRARY_NAME );
+		System.loadLibrary("opencv_java331");
 		
 		m_Layouts  = new ArrayList<>();
 		
@@ -180,7 +179,7 @@ public class ImageManager
 		for(OmrImage image : images) 
 		{
 			deskewdImages.add(ImageUtil.bufferedImageToMat(ImageUtil.deskewImage(image).asBitmap()));
-			System.out.println("Deskewing image: " + (i+1));
+			System.out.println("Deskewing image: " + (i + 1));
 			i++;
 		}
 

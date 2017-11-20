@@ -13,12 +13,13 @@ public class App
 	{
 		System.out.println("Starting to process images");
 		long start = System.currentTimeMillis();
-
+	
 		ImageManager imageManager = new ImageManager();
 		
-		List<OmrImage> inputImages = FileUtil.readOmrFromFolder("res/input/");
-
+		List<OmrImage> inputImages = FileUtil.readOmrFromFolder("input/");
+		
 		System.out.println("Starting to deskew images...");
+
 		List<Mat> deskewedImages = imageManager.deskewImages(inputImages);
 		System.out.println("Image deskewing done");
 		
@@ -27,7 +28,7 @@ public class App
 		System.out.println("Image modifying done");
 		
 		System.out.println("Saving images...");
-		FileUtil.writeToFolder("res/output/", modifiedImages);
+		FileUtil.writeToFolder("output/", modifiedImages);
 		
 		long end = System.currentTimeMillis() - start;
 		
