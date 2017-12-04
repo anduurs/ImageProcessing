@@ -30,6 +30,7 @@ public class ImageUtil
 	    Mat result = new Mat(result_rows, result_cols, CvType.CV_32FC1);
 	    Imgproc.matchTemplate(sourceImage, template, result, Imgproc.TM_CCOEFF_NORMED);
 	    MinMaxLocResult mmr = Core.minMaxLoc(result);
+	    result.release();
 	    
 	    return mmr;
 	}
@@ -47,8 +48,15 @@ public class ImageUtil
 		int h = startY + height;
 		
 		for(int y = 0; y < (h - startY); y++) 
-		    for(int x = 0; x < (w - startX); x++) 
-		    	sourceImage.setRGB(x + startX, y + startY, replacementImage.getRGB(x, y));
+		{
+			for(int x = 0; x < (w - startX); x++)
+		    {
+				if(x + startX < sourceImage.getWidth() && y + startY < sourceImage.getHeight())
+				{
+					sourceImage.setRGB(x + startX, y + startY, replacementImage.getRGB(x, y));
+				}
+		    }
+		} 	
 	}
 	
 	public static OmrImage deskewImage(OmrImage image) 
